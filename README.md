@@ -1,2 +1,2 @@
 # Trend Shop
-Click(here)[]to vist site.
+Click[here](https://mian-azam.github.io/trend-shop/)to vist site.
