@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const api = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
 
 function Products() {
     const [product, getProduct] = useState([]);
+    const [sort, setSort] = useState(null);
 
     useEffect(() => {
         const getData = async () => {
@@ -21,15 +22,40 @@ function Products() {
         getData();
     }, []);
 
+    const handleSort = () => {
+        let sortedProducts;
+        let newSort;
+
+        if (sort === "rating") {
+            sortedProducts = [...product].sort((a, b) => b.price - a.price);
+            newSort = "price";
+        } else {
+            sortedProducts = [...product].sort((a, b) => b.rating - a.rating);
+            newSort = "rating";
+        }
+
+        getProduct(sortedProducts);
+        setSort(newSort);
+    };
+
     return (
-        <div>
-            <div className='movies-container'>
+        <div className="container">
+            <div className="buttons">
+                <button onClick={handleSort} className="sortBtn">Sort by {sort === "rating" ? "Price" : "Rating"}</button>
+                <Link to={`/form`}>
+                    <button className="addBtn">Customize Product</button>
+                </Link>
+            </div>
+            <div className='products-container'>
                 {product.map((p) => (
-                    <div key={p.id} className='movie'>
-                         <h3>{p.name}</h3>
+                    <div key={p.id} className='product'>
+
                         <Link to={`/products/${p.id}`}>
-                        <img src={p.image_link} alt={`Poster for ${p.title}`} />
+                            <img src={p.image_link} alt={`Poster for ${p.title}`} />
                         </Link>
+                        <h3>{p.name}</h3>
+                        <p>Rating: {p.rating}</p>
+                        <p>Price: ${p.price}</p>
                     </div>
                 ))}
             </div>
