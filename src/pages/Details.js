@@ -11,7 +11,7 @@ function Details() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await axios.get(`http://makeup-api.herokuapp.com/api/v1/products/${id}.json`);
+                const response = await axios.get(`https://makeup-api.herokuapp.com/api/v1/products/${id}.json`);
                 setProduct(response.data);
                 console.log(response.data)
                 setProduct(response.data);

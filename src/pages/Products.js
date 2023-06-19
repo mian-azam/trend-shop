@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-const api = 'http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
+const api = 'https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
 
 function Products() {
     const [product, getProduct] = useState([]);
